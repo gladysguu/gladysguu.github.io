@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申请对话 | 500杯咖啡</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <h2>500杯咖啡</h2>
+                    <span class="subtitle">500 Cups of Coffee</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="index.html#about">关于我们</a></li>
+                <li><a href="stories.html">咖啡故事</a></li>
+                <li><a href="apply.html" class="active">申请对话</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>申请对话</h1>
+            <p class="page-subtitle">Apply for a Conversation</p>
+            <p class="page-description">让我们一起，在咖啡的陪伴下，探讨您的未来</p>
+        </div>
+    </section>
+
+    <!-- 申请说明 -->
+    <section class="apply-info">
+        <div class="container">
+            <div class="info-box">
+                <h2>谁可以申请？</h2>
+                <p>我们欢迎所有海外高校的硕士、博士、博士后学者申请。无论您是：</p>
+                <ul class="check-list">
+                    <li>✓ 正在考虑创业还是就业</li>
+                    <li>✓ 思考是回国发展还是留在海外</li>
+                    <li>✓ 希望了解产业和学术的不同路径</li>
+                    <li>✓ 需要职业规划的建议和资源对接</li>
+                </ul>
+                <p class="highlight">对海外学者完全免费 | Free for overseas scholars</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 申请表单 -->
+    <section class="apply-form-section">
+        <div class="container">
+            <div class="form-container">
+                <h2>填写申请信息</h2>
+                <p class="form-intro">请认真填写以下信息，我们将根据您的背景和需求匹配合适的导师</p>
+
+                <form id="application-form">
+                    <!-- 基本信息 -->
+                    <div class="form-section">
+                        <h3 class="section-title">基本信息 Basic Information</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">姓名 Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">电子邮箱 Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">联系电话 Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (xxx) xxx-xxxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">所在地区 Location *</label>
+                                <input type="text" id="location" name="location" required
+                                    placeholder="e.g., Boston, MA, USA">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 学术背景 -->
+                    <div class="form-section">
+                        <h3 class="section-title">学术背景 Academic Background</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="university">所在大学 University *</label>
+                                <input type="text" id="university" name="university" required
+                                    placeholder="e.g., MIT, Stanford">
+                            </div>
+                            <div class="form-group">
+                                <label for="major">专业领域 Major/Field *</label>
+                                <input type="text" id="major" name="major" required
+                                    placeholder="e.g., Computer Science">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="degree">学位类型 Degree *</label>
+                                <select id="degree" name="degree" required>
+                                    <option value="">请选择 Please select</option>
+                                    <option value="硕士 Master's">硕士 Master's</option>
+                                    <option value="博士 PhD">博士 PhD</option>
+                                    <option value="博士后 Postdoc">博士后 Postdoc</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="current-status">当前状态 Current Status *</label>
+                                <select id="current-status" name="current_status" required>
+                                    <option value="">请选择 Please select</option>
+                                    <option value="在读">在读 Currently Enrolled</option>
+                                    <option value="即将毕业">即将毕业 Graduating Soon</option>
+                                    <option value="已毕业">已毕业 Graduated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 对话需求 -->
+                    <div class="form-section">
+                        <h3 class="section-title">对话需求 Conversation Interests</h3>
+
+                        <div class="form-group">
+                            <label for="interest-topics">感兴趣的话题 Topics of Interest *</label>
+                            <textarea id="interest-topics" name="interest_topics" rows="4" required
+                                placeholder="例如：创业指导、产业就业、回国发展机会、学术与工业界选择等"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="career-direction">职业方向考虑 Career Direction Considerations</label>
+                            <textarea id="career-direction" name="career_direction" rows="4"
+                                placeholder="请分享您目前的职业规划想法和困惑"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 见面偏好 -->
+                    <div class="form-section">
+                        <h3 class="section-title">见面偏好 Meeting Preferences</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="preferred-meeting">偏好见面方式 Preferred Meeting Type *</label>
+                                <select id="preferred-meeting" name="preferred_meeting" required>
+                                    <option value="">请选择 Please select</option>
+                                    <option value="线上 Online">线上 Online (Zoom/Teams)</option>
+                                    <option value="线下 In-person">线下 In-person</option>
+                                    <option value="都可以 Either">都可以 Either</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="preferred-time">偏好时间 Preferred Time</label>
+                                <input type="text" id="preferred-time" name="preferred_time"
+                                    placeholder="e.g., Weekday evenings, Weekend mornings">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">其他信息 Additional Message</label>
+                            <textarea id="message" name="message" rows="3" placeholder="任何想告诉我们的信息..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 提交按钮 -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            提交申请 Submit Application
+                        </button>
+                        <p class="form-note">提交后，我们会在3个工作日内与您联系</p>
+                    </div>
+                </form>
+
+                <!-- 成功消息 -->
+                <div id="success-message" class="success-message" style="display: none;">
+                    <div class="success-icon">✓</div>
+                    <h3>申请提交成功！</h3>
+                    <p>感谢您的申请。我们已收到您的信息，将在3个工作日内通过邮件与您联系。</p>
+                    <p class="en">Thank you for your application. We'll contact you within 3 business days.</p>
+                    <button class="btn btn-secondary" onclick="location.reload()">提交另一份申请</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>常见问题 FAQ</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h4>Q: 对话需要多长时间？</h4>
+                    <p>A: 通常为30-60分钟，您可以与导师协商具体时长。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q: 我可以选择导师吗？</h4>
+                    <p>A: 我们会根据您的背景和需求匹配最合适的导师，您也可以在申请中提出偏好。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q: 对话是保密的吗？</h4>
+                    <p>A: 是的，所有对话内容都是保密的。如果您希望分享故事，我们会征得您的同意。</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Q: 真的完全免费吗？</h4>
+                    <p>A: 对所有海外硕士、博士、博士后学者完全免费。我们是非盈利机构，致力于帮助学者成长。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>500杯咖啡</h3>
+                    <p class="tagline">在人生的十字路口，总有一杯智慧在等你。</p>
+                    <p class="tagline-en">At every crossroad, a cup of wisdom awaits.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>快速链接</h4>
+                        <ul>
+                            <li><a href="index.html">首页</a></li>
+                            <li><a href="stories.html">咖啡故事</a></li>
+                            <li><a href="apply.html">申请对话</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>联系我们</h4>
+                        <ul>
+                            <li><a href="mailto:contact@500cups.org">contact@500cups.org</a></li>
+                            <li>在美国注册的非盈利机构</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 500杯咖啡 | 500 Cups of Coffee. All rights reserved.</p>
+                <p class="mission">A non-profit organization dedicated to empowering overseas scholars</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/apply.js"></script>
+</body>
+
+</html>
