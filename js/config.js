@@ -7,7 +7,7 @@
 
 const AIRTABLE_CONFIG = {
     // Your Airtable Personal Access Token
-    API_KEY: 'YOUR_AIRTABLE_API_KEY',
+    API_KEY: 'patGofen4XrfXr9hs.4f8ec57d10d1cc563cb7accf14a871db2462259651aafb554034886832da0cf6',
 
     // Your Airtable Base ID (found in the URL of your base, starts with 'app')
     BASE_ID: 'appW3tljgvz0xIgNj',
