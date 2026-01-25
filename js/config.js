@@ -7,10 +7,10 @@
 
 const AIRTABLE_CONFIG = {
     // Your Airtable Personal Access Token
-    API_KEY: 'patYV7w0ZmsdByegp.91495f80498a518f45622b3fec595133a2a84a4edd7294f1dd0ef293f24f78e9',
+    API_KEY: 'YOUR_AIRTABLE_API_KEY',
 
     // Your Airtable Base ID (found in the URL of your base, starts with 'app')
-    BASE_ID: 'appMun1RH1QLeNZ1V',
+    BASE_ID: 'appW3tljgvz0xIgNj',
 
     // Table names (must match exactly what you created in Airtable)
     TABLES: {
