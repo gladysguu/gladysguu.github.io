@@ -43,24 +43,28 @@ async function loadStories() {
                     id: record.id,
                     ...record.fields,
                     // Normalize image URL from either field type
-                    image_url: imageUrl,
+                    image_url: imageUrl || 'images/default_story_bg.png', // Fallback image if none
                     // Handle tags - Airtable returns array for multiple select
                     tags: Array.isArray(record.fields.tags)
-                        ? record.fields.tags.join(',')
-                        : record.fields.tags || ''
+                        ? record.fields.tags
+                        : (record.fields.tags ? record.fields.tags.split(',') : []),
+                    // Default fields for premium UI if missing in data
+                    date: record.fields.created_time ? new Date(record.fields.created_time).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
+                    read_time: '5 min read', // Placeholder or calculation based on length
+                    participant_role: record.fields.role || 'Scholar',
+                    participant_name: record.fields.name || 'Anonymous'
                 };
             });
             displayStories(allStories);
             loadingElement.style.display = 'none';
         } else {
             loadingElement.style.display = 'none';
-            containerElement.style.display = 'none';
+            // Show empty state
             noStoriesElement.style.display = 'block';
         }
     } catch (error) {
         console.error('Error loading stories:', error);
         loadingElement.style.display = 'none';
-        containerElement.style.display = 'none';
         noStoriesElement.style.display = 'block';
     }
 }
@@ -70,77 +74,123 @@ function displayStories(stories) {
     const container = document.getElementById('stories-container');
     container.innerHTML = '';
 
+    // 添加渐入动画
+    container.style.opacity = '0';
+
     if (stories.length === 0) {
         container.innerHTML = '<p class="no-stories">没有找到符合条件的故事</p>';
+        container.style.opacity = '1';
         return;
     }
 
-    stories.forEach(story => {
+    stories.forEach((story, index) => {
         const storyCard = createStoryCard(story);
+        // 错落动画
+        storyCard.style.animationDelay = `${index * 0.1}s`;
         container.appendChild(storyCard);
     });
+
+    // 淡入显示
+    setTimeout(() => {
+        container.style.transition = 'opacity 0.5s ease';
+        container.style.opacity = '1';
+    }, 100);
 }
 
-// 创建故事卡片
+// 创建高级感故事卡片
 function createStoryCard(story) {
-    const card = document.createElement('div');
-    card.className = 'story-card';
+    const card = document.createElement('article');
+    card.className = 'story-card reveal';
+    card.onclick = () => openStoryModal(story);
 
-    // 处理故事内容，去除HTML标签，截取前150字
-    const contentText = (story.story_content || '').replace(/<[^>]*>/g, '');
-    const excerpt = contentText.length > 150 ? contentText.substring(0, 150) + '...' : contentText;
+    // 提取纯文本简介
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = story.story_content;
+    const plainText = tempDiv.textContent || tempDiv.innerText || '';
+    const excerpt = plainText.length > 100 ? plainText.substring(0, 100) + '...' : plainText;
 
-    // 处理标签
-    const tags = story.tags ? story.tags.split(',').map(tag => tag.trim()) : [];
-    const tagsHtml = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+    // 生成标签HTML
+    const tagsHtml = story.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
 
     card.innerHTML = `
-        ${story.image_url ? `<img src="${story.image_url}" alt="${story.title}" class="story-image">` : '<div class="story-image"></div>'}
+        <div class="story-image-wrapper">
+            <div class="image-overlay"></div>
+            <img src="${story.image_url}" alt="${story.title}" class="story-image">
+            <div class="story-card-badges">
+                ${tagsHtml}
+            </div>
+        </div>
         <div class="story-content">
             <div class="story-meta">
-                <span>${story.participant_role || '学者'}</span>
-                <span>${story.date || ''}</span>
+                <span class="story-date">${story.date}</span>
+                <span class="story-read-time">· ${story.read_time}</span>
             </div>
-            <h3>${story.title || ''}</h3>
+            <h3 class="story-title-en">${story.title}</h3>
+            ${story.title_cn ? `<h4 class="story-title-cn">${story.title_cn}</h4>` : ''}
             <p class="story-excerpt">${excerpt}</p>
-            ${tagsHtml ? `<div class="story-tags">${tagsHtml}</div>` : ''}
+            <div class="story-author">
+                <div class="author-avatar-placeholder">${story.participant_name.charAt(0)}</div>
+                <div class="author-info">
+                    <span class="author-name">${story.participant_name}</span>
+                    <span class="author-role">${story.participant_role}</span>
+                </div>
+            </div>
         </div>
     `;
 
     return card;
 }
 
+// 打开故事详情模态框
+function openStoryModal(story) {
+    const modal = document.getElementById('story-view-modal');
+
+    // 填充数据
+    document.getElementById('view-story-title').textContent = story.title;
+    document.getElementById('view-story-tags').innerHTML = story.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+    document.getElementById('view-story-author').textContent = story.participant_name;
+    document.getElementById('view-story-date').textContent = story.date;
+    document.getElementById('view-read-time').textContent = story.read_time;
+
+    const imageContainer = document.getElementById('view-story-image');
+    imageContainer.style.backgroundImage = `url(${story.image_url})`;
+
+    // 内容填充
+    const contentContainer = document.getElementById('view-story-content');
+    contentContainer.innerHTML = story.story_content;
+    if (story.title_cn) {
+        contentContainer.innerHTML = `<h2 class="content-subtitle-cn">${story.title_cn}</h2>` + contentContainer.innerHTML;
+    }
+
+    // 显示模态框
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 禁止背景滚动
+}
+
+// 关闭故事详情
+function closeStoryView() {
+    const modal = document.getElementById('story-view-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // 恢复滚动
+}
+
 // 筛选故事
 function filterStories(filterValue) {
     currentFilter = filterValue;
-
-    if (filterValue === 'all') {
-        displayStories(allStories);
-    } else {
-        const filtered = allStories.filter(story => {
-            return story.tags && story.tags.includes(filterValue);
-        });
-        displayStories(filtered);
-    }
+    const stories = filterValue === 'all'
+        ? allStories
+        : allStories.filter(s => s.tags.includes(filterValue));
+    displayStories(stories);
 }
 
 // 搜索故事
 function searchStories(searchTerm) {
     searchTerm = searchTerm.toLowerCase();
-
-    let stories = currentFilter === 'all' ? allStories : allStories.filter(story => {
-        return story.tags && story.tags.includes(currentFilter);
+    const filtered = allStories.filter(story => {
+        const fullText = (story.title + story.title_cn + story.story_content + story.participant_name + story.tags.join('')).toLowerCase();
+        return fullText.includes(searchTerm);
     });
-
-    if (searchTerm) {
-        stories = stories.filter(story => {
-            return (story.title && story.title.toLowerCase().includes(searchTerm)) ||
-                (story.story_content && story.story_content.toLowerCase().includes(searchTerm)) ||
-                (story.participant_name && story.participant_name.toLowerCase().includes(searchTerm));
-        });
-    }
-
-    displayStories(stories);
+    displayStories(filtered);
 }
 
 // 提交故事表单处理 (Submit story to Airtable)
@@ -227,6 +277,22 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = 'none';
         }
     });
+
+    // 故事详情模态框关闭事件
+    const storyViewModal = document.getElementById('story-view-modal');
+    const closeStoryViewBtn = document.getElementById('close-story-view');
+
+    if (closeStoryViewBtn) {
+        closeStoryViewBtn.addEventListener('click', closeStoryView);
+    }
+
+    if (storyViewModal) {
+        storyViewModal.addEventListener('click', function (e) {
+            if (e.target === storyViewModal) {
+                closeStoryView();
+            }
+        });
+    }
 
     // 故事提交表单处理
     const storyForm = document.getElementById('story-submission-form');

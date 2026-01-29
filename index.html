@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>500杯咖啡 | 500 Cups of Coffee</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
+    <!-- 背景装饰图层 -->
+    <div class="bg-decor">
+        <div class="bg-grid"></div>
+        <div class="bg-motif"></div>
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+    </div>
+
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
@@ -21,29 +34,33 @@
                 <li><a href="index.html" class="active">首页</a></li>
                 <li><a href="#about">关于我们</a></li>
                 <li><a href="stories.html">咖啡故事</a></li>
-                <li><a href="apply.html">申请对话</a></li>
+                <li><a href="apply.html#apply-form">申请对话</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- 主横幅区域 -->
     <section class="hero">
-        <div class="container">
-            <div class="hero-content">
+        <div class="container hero-container">
+            <div class="hero-content reveal">
                 <h1 class="main-slogan">One conversation brews brighter futures.</h1>
                 <p class="main-slogan-cn">一场对话，酝酿更亮的未来。</p>
-                
-                <div class="sub-slogans">
+
+                <div class="sub-slogans reveal reveal-delay-1">
                     <div class="slogan-item">
                         <p class="en">"A thousand miles begin with one cup of coffee."</p>
                         <p class="cn">千里之行，始于一杯咖啡。</p>
                     </div>
                 </div>
 
-                <div class="cta-buttons">
-                    <a href="apply.html" class="btn btn-primary">申请对话 Apply Now</a>
+                <div class="cta-buttons reveal reveal-delay-2">
+                    <a href="apply.html#apply-form" class="btn btn-primary">申请对话 Apply Now</a>
                     <a href="stories.html" class="btn btn-secondary">阅读故事 Read Stories</a>
                 </div>
+            </div>
+            <!-- 极简咖啡插画 -->
+            <div class="hero-illustration reveal reveal-delay-1">
+                <img src="images/coffee_steam_minimal.png" alt="Coffee steam illustration" class="coffee-illustration">
             </div>
         </div>
     </section>
@@ -55,13 +72,14 @@
                 <h2>关于项目 About the Project</h2>
                 <div class="divider"></div>
             </div>
-            
-            <div class="intro-content">
+
+            <div class="intro-content reveal">
                 <p class="lead">
                     "500杯咖啡"是一项面向海外高校在读硕士、博士、博士后群体的陪伴型交流计划。
                 </p>
                 <p>
-                    通过500场面对面或线上咖啡交流，帮助他们在"创业 vs 就业"、"回国发展 vs 留在海外"这些人生十字路口做出更清晰、更务实的选择。同时，链接投资机构、产业资源、导师与校友网络，为他们的学术、职业与创业路径提供支持。
+                    通过500场面对面或线上咖啡交流，帮助他们在"创业 vs 就业"、"回国发展 vs
+                    留在海外"这些人生十字路口做出更清晰、更务实的选择。同时，链接投资机构、产业资源、导师与校友网络，为他们的学术、职业与创业路径提供支持。
                 </p>
             </div>
 
@@ -95,22 +113,22 @@
             </div>
 
             <div class="values-grid">
-                <div class="value-card">
+                <div class="value-card reveal reveal-delay-1">
                     <div class="value-icon">☕</div>
                     <h3>陪伴与启发</h3>
                     <p>通过深度交流，帮助学生厘清价值观、人生目标与路径选择</p>
                 </div>
-                <div class="value-card">
+                <div class="value-card reveal reveal-delay-2">
                     <div class="value-icon">🤝</div>
                     <h3>资源对接</h3>
                     <p>打通校友会、投资机构、产业园区、企业招聘等资源</p>
                 </div>
-                <div class="value-card">
+                <div class="value-card reveal reveal-delay-3">
                     <div class="value-icon">🌏</div>
                     <h3>未来社群</h3>
                     <p>形成跨学科、跨地域的海外学子社群，促进长期合作</p>
                 </div>
-                <div class="value-card">
+                <div class="value-card reveal reveal-delay-4">
                     <div class="value-icon">💡</div>
                     <h3>智慧分享</h3>
                     <p>连接企业家、投资人与青年学者，分享经验与洞见</p>
@@ -127,33 +145,41 @@
                 <div class="divider"></div>
             </div>
 
-            <div class="join-grid">
+            <div class="join-grid reveal">
                 <div class="join-step">
                     <div class="step-number">01</div>
-                    <h3>提交申请</h3>
-                    <p>填写在线申请表，告诉我们您的背景和关注的话题</p>
+                    <div>
+                        <h3>提交申请</h3>
+                        <p>填写在线申请表，告诉我们您的背景和关注的话题</p>
+                    </div>
                 </div>
                 <div class="join-step">
                     <div class="step-number">02</div>
-                    <h3>匹配导师</h3>
-                    <p>我们根据您的兴趣匹配合适的导师或企业家</p>
+                    <div>
+                        <h3>匹配导师</h3>
+                        <p>我们根据您的兴趣匹配合适的导师或企业家</p>
+                    </div>
                 </div>
                 <div class="join-step">
                     <div class="step-number">03</div>
-                    <h3>预约时间</h3>
-                    <p>选择线上或线下，在方便的时间进行一对一交流</p>
+                    <div>
+                        <h3>预约时间</h3>
+                        <p>选择线上或线下，在方便的时间进行一对一交流</p>
+                    </div>
                 </div>
                 <div class="join-step">
                     <div class="step-number">04</div>
-                    <h3>开启对话</h3>
-                    <p>在咖啡的陪伴下，开启一段深度的人生对话</p>
+                    <div>
+                        <h3>开启对话</h3>
+                        <p>在咖啡的陪伴下，开启一段深度的人生对话</p>
+                    </div>
                 </div>
             </div>
 
             <div class="join-cta">
                 <h3>准备好开始您的对话了吗？</h3>
                 <p class="en">Ready to start your conversation?</p>
-                <a href="apply.html" class="btn btn-primary">立即申请 Apply Now</a>
+                <a href="apply.html#apply-form" class="btn btn-primary">立即申请 Apply Now</a>
             </div>
         </div>
     </section>
@@ -167,7 +193,7 @@
                     <p class="tagline">在人生的十字路口，总有一杯智慧在等你。</p>
                     <p class="tagline-en">At every crossroad, a cup of wisdom awaits.</p>
                 </div>
-                
+
                 <div class="footer-links">
                     <div class="footer-section">
                         <h4>快速链接</h4>
@@ -177,7 +203,7 @@
                             <li><a href="apply.html">申请对话</a></li>
                         </ul>
                     </div>
-                    
+
                     <div class="footer-section">
                         <h4>联系我们</h4>
                         <ul>
@@ -187,7 +213,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 <p>&copy; 2024 500杯咖啡 | 500 Cups of Coffee. All rights reserved.</p>
                 <p class="mission">A non-profit organization dedicated to empowering overseas scholars</p>
@@ -197,4 +223,5 @@
 
     <script src="js/main.js"></script>
 </body>
+
 </html>

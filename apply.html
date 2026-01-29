@@ -7,11 +7,20 @@
     <title>申请对话 | 500杯咖啡</title>
     <link rel="stylesheet" href="css/style.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
+    <!-- 背景装饰图层 -->
+    <div class="bg-decor">
+        <div class="bg-grid"></div>
+        <div class="bg-motif"></div>
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+    </div>
+
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
@@ -25,7 +34,7 @@
                 <li><a href="index.html">首页</a></li>
                 <li><a href="index.html#about">关于我们</a></li>
                 <li><a href="stories.html">咖啡故事</a></li>
-                <li><a href="apply.html" class="active">申请对话</a></li>
+                <li><a href="apply.html#apply-form" class="active">申请对话</a></li>
             </ul>
         </div>
     </nav>
@@ -57,7 +66,7 @@
     </section>
 
     <!-- 申请表单 -->
-    <section class="apply-form-section">
+    <section class="apply-form-section" id="apply-form">
         <div class="container">
             <div class="form-container">
                 <h2>填写申请信息</h2>

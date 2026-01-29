@@ -7,11 +7,20 @@
     <title>咖啡故事 | 500杯咖啡</title>
     <link rel="stylesheet" href="css/style.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
+    <!-- 背景装饰图层 -->
+    <div class="bg-decor">
+        <div class="bg-grid"></div>
+        <div class="bg-motif"></div>
+        <div class="bg-shape shape-1"></div>
+        <div class="bg-shape shape-2"></div>
+        <div class="bg-shape shape-3"></div>
+    </div>
+
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
@@ -25,7 +34,7 @@
                 <li><a href="index.html">首页</a></li>
                 <li><a href="index.html#about">关于我们</a></li>
                 <li><a href="stories.html" class="active">咖啡故事</a></li>
-                <li><a href="apply.html">申请对话</a></li>
+                <li><a href="apply.html#apply-form">申请对话</a></li>
             </ul>
         </div>
     </nav>
@@ -85,6 +94,34 @@
             </div>
         </div>
     </section>
+
+    <!-- 故事详情模态框 -->
+    <div id="story-view-modal" class="modal story-view-modal">
+        <div class="modal-content story-view-content">
+            <span class="modal-close" id="close-story-view">&times;</span>
+            <div class="story-detail-container">
+                <div class="story-header">
+                    <div class="story-tags-list" id="view-story-tags"></div>
+                    <h1 id="view-story-title">故事标题</h1>
+                    <div class="story-meta-row">
+                        <span id="view-story-author">作者</span>
+                        <span class="separator">·</span>
+                        <span id="view-story-date">日期</span>
+                        <span class="separator">·</span>
+                        <span id="view-read-time">阅读时间</span>
+                    </div>
+                </div>
+                <div class="story-cover-image" id="view-story-image"></div>
+                <div class="story-body" id="view-story-content">
+                    <!-- 故事内容 -->
+                </div>
+                <div class="story-footer">
+                    <div class="divider"></div>
+                    <p class="footer-note">想分享您的故事？<a href="#" id="link-to-submit">立即提交</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 故事提交表单模态框 -->
     <div id="story-modal" class="modal">
