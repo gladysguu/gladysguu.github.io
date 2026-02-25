@@ -1507,11 +1507,26 @@ body {
     }
 
     .footer-content {
-        grid-template-columns: 1fr;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .footer-brand h3 {
+        font-size: 1.8rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: var(--spacing-sm);
     }
 
     .stories-grid {
         grid-template-columns: 1fr;
+    }
+
+    .story-card,
+    .story-card:nth-child(5n+1) {
+        grid-column: span 1;
     }
 
     .form-row {
