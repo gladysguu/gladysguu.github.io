@@ -128,4 +128,76 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    // 多日期+时间段选择器逻辑
+    const addDateBtn = document.getElementById('add-date-btn');
+    const dateInput = document.getElementById('preferred-time-input');
+    const timeslotSelect = document.getElementById('preferred-timeslot');
+    const selectedDatesContainer = document.getElementById('selected-dates');
+    const hiddenDateInput = document.getElementById('preferred-time');
+    const selectedEntries = [];
+
+    function formatDateDisplay(dateStr) {
+        const date = new Date(dateStr + 'T00:00:00');
+        return date.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            weekday: 'short'
+        });
+    }
+
+    function entryKey(entry) {
+        return entry.date + '|' + (entry.timeslot || '');
+    }
+
+    function syncHiddenInput() {
+        hiddenDateInput.value = selectedEntries.map(e =>
+            e.timeslot ? `${e.date} ${e.timeslot}` : e.date
+        ).join(', ');
+    }
+
+    function renderEntries() {
+        selectedDatesContainer.innerHTML = '';
+        selectedEntries.forEach((entry, index) => {
+            const tag = document.createElement('span');
+            tag.className = 'date-tag';
+            const label = entry.timeslot
+                ? `${formatDateDisplay(entry.date)} ${entry.timeslot}`
+                : formatDateDisplay(entry.date);
+            tag.innerHTML = `${label}<button type="button" class="remove-date" data-index="${index}">&times;</button>`;
+            selectedDatesContainer.appendChild(tag);
+        });
+        syncHiddenInput();
+    }
+
+    if (addDateBtn && dateInput) {
+        addDateBtn.addEventListener('click', function () {
+            const dateValue = dateInput.value;
+            if (!dateValue) return;
+            const timeslotValue = timeslotSelect ? timeslotSelect.value : '';
+            const newEntry = { date: dateValue, timeslot: timeslotValue };
+            const newKey = entryKey(newEntry);
+
+            // 防止重复
+            if (selectedEntries.some(e => entryKey(e) === newKey)) {
+                dateInput.value = '';
+                if (timeslotSelect) timeslotSelect.value = '';
+                return;
+            }
+
+            selectedEntries.push(newEntry);
+            dateInput.value = '';
+            if (timeslotSelect) timeslotSelect.value = '';
+            renderEntries();
+        });
+
+        selectedDatesContainer.addEventListener('click', function (e) {
+            const removeBtn = e.target.closest('.remove-date');
+            if (!removeBtn) return;
+            const index = parseInt(removeBtn.dataset.index, 10);
+            selectedEntries.splice(index, 1);
+            renderEntries();
+        });
+    }
 });
