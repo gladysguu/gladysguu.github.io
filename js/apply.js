@@ -51,16 +51,20 @@ async function sendConfirmationEmail(formData) {
             preferred_time: formData.get('preferred_time') || '待确认'
         };
 
+        console.log('正在发送确认邮件，参数:', JSON.stringify(templateParams));
+        console.log('EmailJS 配置:', EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID);
+
         const response = await emailjs.send(
             EMAILJS_CONFIG.SERVICE_ID,
             EMAILJS_CONFIG.TEMPLATE_ID,
             templateParams
         );
 
-        console.log('确认邮件发送成功:', response.status);
+        console.log('确认邮件发送成功:', response.status, response.text);
         return true;
     } catch (error) {
         console.error('确认邮件发送失败:', error);
+        console.error('错误详情:', JSON.stringify(error));
         return false;
     }
 }
@@ -130,8 +134,11 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await submitApplication(formData);
 
             if (result) {
-                // 提交成功，发送确认邮件（不阻塞主流程）
-                sendConfirmationEmail(formData);
+                // 提交成功，发送确认邮件
+                const emailSent = await sendConfirmationEmail(formData);
+                if (!emailSent) {
+                    console.warn('确认邮件未能发送，但申请已提交成功');
+                }
                 showSuccessMessage();
             } else {
                 // 提交失败
