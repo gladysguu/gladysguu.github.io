@@ -37,6 +37,34 @@ async function submitApplication(formData) {
     }
 }
 
+// 发送确认邮件 (Send confirmation email via EmailJS)
+async function sendConfirmationEmail(formData) {
+    try {
+        emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+
+        const templateParams = {
+            to_name: formData.get('name'),
+            to_email: formData.get('email'),
+            university: formData.get('university'),
+            major: formData.get('major'),
+            preferred_meeting: formData.get('preferred_meeting'),
+            preferred_time: formData.get('preferred_time') || '待确认'
+        };
+
+        const response = await emailjs.send(
+            EMAILJS_CONFIG.SERVICE_ID,
+            EMAILJS_CONFIG.TEMPLATE_ID,
+            templateParams
+        );
+
+        console.log('确认邮件发送成功:', response.status);
+        return true;
+    } catch (error) {
+        console.error('确认邮件发送失败:', error);
+        return false;
+    }
+}
+
 // 表单验证
 function validateForm(form) {
     const requiredFields = form.querySelectorAll('[required]');
@@ -102,7 +130,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const result = await submitApplication(formData);
 
             if (result) {
-                // 提交成功
+                // 提交成功，发送确认邮件（不阻塞主流程）
+                sendConfirmationEmail(formData);
                 showSuccessMessage();
             } else {
                 // 提交失败

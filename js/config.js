@@ -56,3 +56,12 @@ async function airtableGet(tableName, params = {}) {
     const url = queryString ? `${tableName}?${queryString}` : tableName;
     return airtableFetch(url);
 }
+
+// ========================
+// EmailJS Configuration
+// ========================
+const EMAILJS_CONFIG = {
+    PUBLIC_KEY: 'U_b8FOyw2TyN5Kmur',
+    SERVICE_ID: 'service_28xnw91',
+    TEMPLATE_ID: 'template_gnwg8yh'
+};
